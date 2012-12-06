@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using NMasters.Silverlight.Net.Http.Helpers;
 using NMasters.Silverlight.Net.Http.Internal;
+using NMasters.Silverlight.Net.Properties;
 
 namespace NMasters.Silverlight.Net.Http.Headers
 {

@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using NMasters.Silverlight.Net.Http.Helpers;
+using NMasters.Silverlight.Net.Properties;
 
 namespace NMasters.Silverlight.Net.Http.Handlers
 {

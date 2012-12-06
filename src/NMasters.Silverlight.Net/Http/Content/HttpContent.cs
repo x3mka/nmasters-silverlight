@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NMasters.Silverlight.Net.Http.Exceptions;
 using NMasters.Silverlight.Net.Http.Headers;
 using NMasters.Silverlight.Net.Http.Helpers;
+using NMasters.Silverlight.Net.Properties;
 
 namespace NMasters.Silverlight.Net.Http.Content
 {

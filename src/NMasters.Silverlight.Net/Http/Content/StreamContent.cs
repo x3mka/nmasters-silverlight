@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using NMasters.Silverlight.Net.Http.Helpers;
 using NMasters.Silverlight.Net.Http.Internal;
+using NMasters.Silverlight.Net.Properties;
 
 namespace NMasters.Silverlight.Net.Http.Content
 {

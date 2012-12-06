@@ -7,6 +7,7 @@ using NMasters.Silverlight.Net.Http.Configuration;
 using NMasters.Silverlight.Net.Http.Content;
 using NMasters.Silverlight.Net.Http.Exceptions;
 using NMasters.Silverlight.Net.Http.Helpers;
+using NMasters.Silverlight.Net.Properties;
 
 namespace NMasters.Silverlight.Net.Http
 {
