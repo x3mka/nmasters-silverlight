@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D5661801-C104-4ECA-A3B8-880964BEEE3C}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NMasters.Silverlight.Net</RootNamespace>
+    <AssemblyName>NMasters.Silverlight.Net</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExceptionHelper.cs" />
+    <Compile Include="HttpKnownHeaderNames.cs" />
+    <Compile Include="HttpStatusDescription.cs" />
+    <Compile Include="Http\Configuration\ClientCertificateOption.cs" />
+    <Compile Include="Http\Configuration\HttpCompletionOption.cs" />
+    <Compile Include="Http\Configuration\HttpTransportConfiguration.cs" />
+    <Compile Include="Http\Content\ByteArrayContent.cs" />
+    <Compile Include="Http\Content\FormUrlEncodedContent.cs" />
+    <Compile Include="Http\Content\HttpContent.cs" />
+    <Compile Include="Http\Content\MultipartContent.cs" />
+    <Compile Include="Http\Content\MultipartFormDataContent.cs" />
+    <Compile Include="Http\Content\StreamContent.cs" />
+    <Compile Include="Http\Content\StringContent.cs" />
+    <Compile Include="Http\Exceptions\HttpRequestException.cs" />
+    <Compile Include="Http\Handlers\DelegatingHandler.cs" />
+    <Compile Include="Http\Handlers\HttpClientHandler.cs" />
+    <Compile Include="Http\Handlers\HttpMessageHandler.cs" />
+    <Compile Include="Http\Handlers\MessageProcessingHandler.cs" />
+    <Compile Include="Http\Headers\AuthenticationHeaderValue.cs" />
+    <Compile Include="Http\Headers\BaseHeaderParser.cs" />
+    <Compile Include="Http\Headers\ByteArrayHeaderParser.cs" />
+    <Compile Include="Http\Headers\CacheControlHeaderParser.cs" />
+    <Compile Include="Http\Headers\CacheControlHeaderValue.cs" />
+    <Compile Include="Http\Headers\ContentDispositionHeaderValue.cs" />
+    <Compile Include="Http\Headers\ContentRangeHeaderValue.cs" />
+    <Compile Include="Http\Headers\DateHeaderParser.cs" />
+    <Compile Include="Http\Headers\EntityTagHeaderValue.cs" />
+    <Compile Include="Http\Headers\GenericHeaderParser.cs" />
+    <Compile Include="Http\Headers\HeaderUtilities.cs" />
+    <Compile Include="Http\Headers\HttpContentHeaders.cs" />
+    <Compile Include="Http\Headers\HttpGeneralHeaders.cs" />
+    <Compile Include="Http\Headers\HttpHeaderParser.cs" />
+    <Compile Include="Http\Headers\HttpHeaders.cs" />
+    <Compile Include="Http\Headers\HttpHeaderValueCollection.cs" />
+    <Compile Include="Http\Headers\HttpRequestHeaders.cs" />
+    <Compile Include="Http\Headers\HttpResponseHeaders.cs" />
+    <Compile Include="Http\Headers\Int32NumberHeaderParser.cs" />
+    <Compile Include="Http\Headers\Int64NumberHeaderParser.cs" />
+    <Compile Include="Http\Headers\MediaTypeHeaderParser.cs" />
+    <Compile Include="Http\Headers\MediaTypeHeaderValue.cs" />
+    <Compile Include="Http\Headers\MediaTypeWithQualityHeaderValue.cs" />
+    <Compile Include="Http\Headers\NameValueHeaderValue.cs" />
+    <Compile Include="Http\Headers\NameValueWithParametersHeaderValue.cs" />
+    <Compile Include="Http\Headers\ObjectCollection!1.cs" />
+    <Compile Include="Http\Headers\ProductHeaderValue.cs" />
+    <Compile Include="Http\Headers\ProductInfoHeaderParser.cs" />
+    <Compile Include="Http\Headers\ProductInfoHeaderValue.cs" />
+    <Compile Include="Http\Headers\RangeConditionHeaderValue.cs" />
+    <Compile Include="Http\Headers\RangeHeaderValue.cs" />
+    <Compile Include="Http\Headers\RangeItemHeaderValue.cs" />
+    <Compile Include="Http\Headers\RetryConditionHeaderValue.cs" />
+    <Compile Include="Http\Headers\StringWithQualityHeaderValue.cs" />
+    <Compile Include="Http\Headers\TimeSpanHeaderParser.cs" />
+    <Compile Include="Http\Headers\TransferCodingHeaderParser.cs" />
+    <Compile Include="Http\Headers\TransferCodingHeaderValue.cs" />
+    <Compile Include="Http\Headers\TransferCodingWithQualityHeaderValue.cs" />
+    <Compile Include="Http\Headers\UriHeaderParser.cs" />
+    <Compile Include="Http\Headers\ViaHeaderValue.cs" />
+    <Compile Include="Http\Headers\WarningHeaderValue.cs" />
+    <Compile Include="Http\Helpers\HttpUtilities.cs" />
+    <Compile Include="Http\Helpers\SR.cs" />
+    <Compile Include="Http\HttpClient.cs" />
+    <Compile Include="Http\HttpClientExtensions.cs" />
+    <Compile Include="Http\HttpMessageInvoker.cs" />
+    <Compile Include="Http\HttpMethod.cs" />
+    <Compile Include="Http\HttpRequestMessage.cs" />
+    <Compile Include="Http\HttpResponseMessage.cs" />
+    <Compile Include="Http\Internal\DelegatingStream.cs" />
+    <Compile Include="Http\Internal\HttpParseResult.cs" />
+    <Compile Include="Http\Internal\HttpRuleParser.cs" />
+    <Compile Include="Http\Internal\StreamToStreamCopy.cs" />
+    <Compile Include="Http\Linq\Collections\ConcurrentDictionary.cs" />
+    <Compile Include="Http\Linq\ExpressionBindings\IExpressionBindingStrategy.cs" />
+    <Compile Include="Http\Linq\ExpressionBindings\QueryStringExpressionBindingStrategy.cs" />
+    <Compile Include="Http\Linq\HttpClientExtensions.cs" />
+    <Compile Include="Http\Linq\HttpQuery.cs" />
+    <Compile Include="Http\Linq\HttpQueryContext.cs" />
+    <Compile Include="Http\Linq\HttpQueryProvider.cs" />
+    <Compile Include="Http\Linq\HttpQueryProviderBase.cs" />
+    <Compile Include="Http\Linq\OData\ChainOfResponsibility.cs" />
+    <Compile Include="Http\Linq\OData\Evaluator.cs" />
+    <Compile Include="Http\Linq\OData\ODataExpressionBindingStrategy.cs" />
+    <Compile Include="Http\Linq\OData\ODataExpressionVisitor.cs" />
+    <Compile Include="Http\Linq\TypeSystem.cs" />
+    <Compile Include="Http\Linq\UriBuilders\DefaultEntityUriBuilder.cs" />
+    <Compile Include="Http\Linq\UriBuilders\EntityUriAttribute.cs" />
+    <Compile Include="Http\Linq\UriBuilders\IEntityUriBuilder.cs" />
+    <Compile Include="Logging.cs" />
+    <Compile Include="NclUtilities.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimerThread.cs" />
+    <Compile Include="UriExtensions.cs" />
+    <Compile Include="UriHelper.cs" />
+    <Compile Include="ValidationHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Http\SR.resx" />
+    <EmbeddedResource Include="Http\SysSR.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
