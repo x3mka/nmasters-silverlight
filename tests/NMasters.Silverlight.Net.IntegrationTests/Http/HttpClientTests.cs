@@ -10,16 +10,19 @@ namespace NMasters.Silverlight.Net.IntegrationTests.Http
 {
     [TestClass]
     public class HttpClientTests
-    {
-        private static readonly Uri BaseApiUriAddress = new Uri("http://localhost:1259/api/");
-
+    {        
         [TestMethod]
         public void CanGetStringContent()
         {
-            var client = new HttpClient() { BaseAddress = BaseApiUriAddress };
-            var response = client.GetAsync("persons").Result;
+            var client = new HttpClient() { BaseAddress = ApiConfig.ApiBaseAddress };
+            var response = client.GetAsync("persons").Result;            
 
-            Assert.IsTrue(response.StatusCode == HttpStatusCode.OK);            
+            Assert.IsTrue(response.StatusCode == HttpStatusCode.OK);
+
+            var content = response.Content.ReadAsStringAsync().Result;
+
+            Assert.IsNotNull(content);
+            Assert.IsTrue(content.Length > 0);
         }
     }
 }

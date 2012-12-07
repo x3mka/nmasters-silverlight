@@ -1267,6 +1267,43 @@ namespace NMasters.Silverlight.Net.Http.Headers
             return value.Equals(storeValue);
         }
 
+        public bool TryAddWithoutValidation(string name, string value)
+        {
+            if (!this.TryCheckHeaderName(name))
+            {
+                return false;
+            }
+            if (value == null)
+            {
+                value = string.Empty;
+            }
+            AddValue(this.GetOrCreateHeaderInfo(name, false), value, StoreLocation.Raw);
+            return true;
+        }
+
+        private bool TryCheckHeaderName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return false;
+            }
+            if (HttpRuleParser.GetTokenLength(name, 0) != name.Length)
+            {
+                return false;
+            }
+            if ((this.invalidHeaders != null) && this.invalidHeaders.Contains(name))
+            {
+                return false;
+            }
+            return true;
+        }
+
+ 
+
+
+ 
+
+
         #region Private Classes
 
         private class HeaderStoreItemInfo

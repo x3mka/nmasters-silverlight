@@ -90,9 +90,12 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptType.cs" />
+    <Compile Include="ApiConfig.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Http\Formatting\HttpClientFormattingExtensionsTests.cs" />
     <Compile Include="Http\HttpClientTests.cs" />
     <Compile Include="Http\Linq\HttpClientExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

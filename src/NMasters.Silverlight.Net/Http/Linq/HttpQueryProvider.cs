@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using NMasters.Silverlight.Net.Http.Formatting;
 
 namespace NMasters.Silverlight.Net.Http.Linq
 {
@@ -24,25 +26,13 @@ namespace NMasters.Silverlight.Net.Http.Linq
             _context.ExpressionBindingStrategy.Bind(expression, _context.Request);
             Debug.WriteLine(_context.Request.RequestUri.ToString());
 
-            //if (_context.Configuration.RequestSetup != null)
-            //    _context.Configuration.RequestSetup(_context.Request);
+            var result = _context.HttpClient.SendAsync(_context.Request).Result;
 
-            var response = _context.HttpClient.SendAsync(_context.Request).Result;
+            var collectionTyle = typeof(IEnumerable<>).MakeGenericType(_context.EntityType);
 
-            //Task<object> task = null;
-            //var formatters = _context.Configuration.CustomFormatters;
-            //if (formatters == null || formatters.Count() == 0)
-            //    formatters = new MediaTypeFormatterCollection();
-
-            //if (response.StatusCode != HttpStatusCode.OK)
-            //{
-            //    throw new PocoHttpResponseException(response);
-            //}
-
-            //task = _context.Configuration.ResponseReader(response, formatters, _context.EntityType);
-
-            //return task.Result;
-		    return response;
+            var entities = result.Content.ReadAsAsync(collectionTyle).Result;
+        
+            return entities;
 		}
     }
 }
