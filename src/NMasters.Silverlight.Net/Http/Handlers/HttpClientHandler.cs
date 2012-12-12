@@ -544,7 +544,10 @@ namespace NMasters.Silverlight.Net.Http.Handlers
             //        return;
             //    }
             //}
-            state.webRequest.BeginGetResponse(GetResponseCallback, state);
+
+
+            var result = state.webRequest.BeginGetResponse(GetResponseCallback, state);
+            TimeoutManager.StartCheckingForTimeout(result);
         }
 
         private void StartRequest(object obj)
@@ -772,7 +775,7 @@ namespace NMasters.Silverlight.Net.Http.Handlers
             }
         }
      
-        private class RequestState
+        internal class RequestState
         {
             internal CancellationToken cancellationToken;            
             internal HttpRequestMessage requestMessage;

@@ -76,6 +76,7 @@
     <Compile Include="Http\Handlers\HttpClientHandler.cs" />
     <Compile Include="Http\Handlers\HttpMessageHandler.cs" />
     <Compile Include="Http\Handlers\MessageProcessingHandler.cs" />
+    <Compile Include="Http\Handlers\TimeoutManager.cs" />
     <Compile Include="Http\Headers\AuthenticationHeaderValue.cs" />
     <Compile Include="Http\Headers\BaseHeaderParser.cs" />
     <Compile Include="Http\Headers\ByteArrayHeaderParser.cs" />
