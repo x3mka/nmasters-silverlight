@@ -47,6 +47,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.4.5.11\lib\sl4\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Json, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core">
@@ -55,9 +61,11 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Serialization, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionHelper.cs" />
+    <Compile Include="Http\Formatting\HttpClientFormattingExtensions.cs" />
     <Compile Include="HttpKnownHeaderNames.cs" />
     <Compile Include="HttpStatusDescription.cs" />
     <Compile Include="Http\Configuration\ClientCertificateOption.cs" />
@@ -68,10 +76,30 @@
     <Compile Include="Http\Content\HttpContent.cs" />
     <Compile Include="Http\Content\MultipartContent.cs" />
     <Compile Include="Http\Content\MultipartFormDataContent.cs" />
+    <Compile Include="Http\Content\ObjectContent.cs" />
+    <Compile Include="Http\Content\ObjectContentOfT.cs" />
     <Compile Include="Http\Content\StreamContent.cs" />
     <Compile Include="Http\Content\StringContent.cs" />
     <Compile Include="Http\Exceptions\Error.cs" />
     <Compile Include="Http\Exceptions\HttpRequestException.cs" />
+    <Compile Include="Http\Formatting\DelegatingEnumerable.cs" />
+    <Compile Include="Http\Formatting\FormattingUtilities.cs" />
+    <Compile Include="Http\Formatting\HttpContentExtensions.cs" />
+    <Compile Include="Http\Formatting\IFormatterLogger.cs" />
+    <Compile Include="Http\Formatting\IRequiredMemberSelector.cs" />
+    <Compile Include="Http\Formatting\JsonContractResolver.cs" />
+    <Compile Include="Http\Formatting\JsonMediaTypeFormatter.cs" />
+    <Compile Include="Http\Formatting\MediaTypeConstants.cs" />
+    <Compile Include="Http\Formatting\MediaTypeFormatter.cs" />
+    <Compile Include="Http\Formatting\MediaTypeFormatterCollection.cs" />
+    <Compile Include="Http\Formatting\MediaTypeHeaderValueExtensions.cs" />
+    <Compile Include="Http\Formatting\MediaTypeHeaderValueRange.cs" />
+    <Compile Include="Http\Formatting\MediaTypeMapping.cs" />
+    <Compile Include="Http\Formatting\ParsedMediaTypeHeaderValue.cs" />
+    <Compile Include="Http\Formatting\RequestHeaderMapping.cs" />
+    <Compile Include="Http\Formatting\StringComparisonHelper.cs" />
+    <Compile Include="Http\Formatting\XmlHttpRequestHeaderMapping.cs" />
+    <Compile Include="Http\Formatting\XmlMediaTypeFormatter.cs" />
     <Compile Include="Http\Handlers\DelegatingHandler.cs" />
     <Compile Include="Http\Handlers\HttpClientHandler.cs" />
     <Compile Include="Http\Handlers\HttpMessageHandler.cs" />
@@ -129,7 +157,14 @@
     <Compile Include="Http\Internal\DelegatingStream.cs" />
     <Compile Include="Http\Internal\HttpParseResult.cs" />
     <Compile Include="Http\Internal\HttpRuleParser.cs" />
+    <Compile Include="Http\Internal\ICloneable.cs" />
+    <Compile Include="Http\Internal\NonClosingDelegatingStream.cs" />
     <Compile Include="Http\Internal\StreamToStreamCopy.cs" />
+    <Compile Include="Http\Internal\TaskHelpers.cs" />
+    <Compile Include="Http\Internal\TaskHelpersExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Http\Internal\TypeExtensions.cs" />
     <Compile Include="Http\Linq\Collections\ConcurrentDictionary.cs" />
     <Compile Include="Http\Linq\ExpressionBindings\IExpressionBindingStrategy.cs" />
     <Compile Include="Http\Linq\ExpressionBindings\QueryStringExpressionBindingStrategy.cs" />
@@ -193,7 +228,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Http\Formatting\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

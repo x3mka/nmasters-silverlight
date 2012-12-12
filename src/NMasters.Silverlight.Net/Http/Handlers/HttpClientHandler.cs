@@ -82,33 +82,37 @@ namespace NMasters.Silverlight.Net.Http.Handlers
 
         private HttpResponseMessage CreateResponseMessage(HttpWebResponse webResponse, HttpRequestMessage request)
         {
-            HttpResponseMessage message = new HttpResponseMessage(webResponse.StatusCode) {
+            var message = new HttpResponseMessage(webResponse.StatusCode) {
                 ReasonPhrase = webResponse.StatusDescription,                
                 RequestMessage = request,
                 Content = new StreamContent(new WebExceptionWrapperStream(webResponse.GetResponseStream()))
             };
+
             request.RequestUri = webResponse.ResponseUri;
-            WebHeaderCollection headers = webResponse.Headers;
-            HttpContentHeaders headers2 = message.Content.Headers;
-            HttpResponseHeaders headers3 = message.Headers;
+
+            WebHeaderCollection responseHeaders = webResponse.Headers;
+            HttpContentHeaders contentHeaders = message.Content.Headers;
+            HttpResponseHeaders messageHeaders = message.Headers;
+
             if (webResponse.ContentLength >= 0)
             {
-                headers2.ContentLength = new long?(webResponse.ContentLength);
+                contentHeaders.ContentLength = webResponse.ContentLength;
             }
 
             // SL fixes
-            //for (int i = 0; i < headers.Count; i++)
-            //{
-            //    string key = headers.GetKey(i);
-            //    if (string.Compare(key, "Content-Length", StringComparison.OrdinalIgnoreCase) != 0)
-            //    {
-            //        string[] values = headers.GetValues(i);
-            //        if (!headers3.TryAddWithoutValidation(key, values))
-            //        {
-            //            headers2.TryAddWithoutValidation(key, values);
-            //        }
-            //    }
-            //}
+            var allKeys = responseHeaders.AllKeys;
+            for (int i = 0; i < allKeys.Length; i++)
+            {
+                string key = allKeys[i];
+                if (string.Compare(key, "Content-Length", StringComparison.OrdinalIgnoreCase) != 0)
+                {
+                    string value = responseHeaders[key];
+                    if (!messageHeaders.TryAddWithoutValidation(key, value))
+                    {
+                        contentHeaders.TryAddWithoutValidation(key, value);
+                    }
+                }
+            }
             return message;
         }
 
@@ -280,8 +284,8 @@ namespace NMasters.Silverlight.Net.Http.Handlers
                 Logging.Enter(Logging.Http, this, "SendAsync", request);
             }
             this.SetOperationStarted();
-            TaskCompletionSource<HttpResponseMessage> source = new TaskCompletionSource<HttpResponseMessage>();
-            RequestState state = new RequestState {
+            var source = new TaskCompletionSource<HttpResponseMessage>();
+            var state = new RequestState {
                 tcs = source,
                 cancellationToken = cancellationToken,
                 requestMessage = request
@@ -575,7 +579,7 @@ namespace NMasters.Silverlight.Net.Http.Handlers
         {
             if ((webException != null) && (webException.Response != null))
             {
-                HttpWebResponse webResponse = webException.Response as HttpWebResponse;
+                var webResponse = webException.Response as HttpWebResponse;
                 if (webResponse != null)
                 {
                     httpResponseMessage = this.CreateResponseMessage(webResponse, requestMessage);

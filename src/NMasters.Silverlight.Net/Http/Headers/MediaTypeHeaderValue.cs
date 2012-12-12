@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using NMasters.Silverlight.Net.Http.Helpers;
 using NMasters.Silverlight.Net.Http.Internal;
@@ -19,17 +20,17 @@ namespace NMasters.Silverlight.Net.Http.Headers
         }
 
         /// <summary>Initializes a new instance of the <see cref="T:NMasters.Silverlight.Net.Http.Headers.MediaTypeHeaderValue" /> class.</summary>
-        //protected MediaTypeHeaderValue(MediaTypeHeaderValue source)
-        //{
-        //    this.mediaType = source.mediaType;
-        //    if (source.parameters != null)
-        //    {
-        //        foreach (NameValueHeaderValue value2 in source.parameters)
-        //        {
-        //            this.Parameters.Add((NameValueHeaderValue) ((ICloneable) value2).Clone());
-        //        }
-        //    }
-        //}
+        protected MediaTypeHeaderValue(MediaTypeHeaderValue source)
+        {
+            this.mediaType = source.mediaType;
+            if (source.parameters != null)
+            {
+                foreach (NameValueHeaderValue value2 in source.parameters)
+                {
+                    this.Parameters.Add((NameValueHeaderValue)((ICloneable)value2).Clone());
+                }
+            }
+        }
 
         /// <summary>Initializes a new instance of the <see cref="T:NMasters.Silverlight.Net.Http.Headers.MediaTypeHeaderValue" /> class.</summary>
         public MediaTypeHeaderValue(string mediaType)
@@ -56,7 +57,7 @@ namespace NMasters.Silverlight.Net.Http.Headers
         /// <param name="obj">The object to compare with the current object.</param>
         public override bool Equals(object obj)
         {
-            MediaTypeHeaderValue value2 = obj as MediaTypeHeaderValue;
+            var value2 = obj as MediaTypeHeaderValue;
             if (value2 == null)
             {
                 return false;
@@ -152,10 +153,16 @@ namespace NMasters.Silverlight.Net.Http.Headers
 
         /// <summary>Creates a new object that is a copy of the current <see cref="T:NMasters.Silverlight.Net.Http.Headers.MediaTypeHeaderValue" /> instance.</summary>
         /// <returns>Returns <see cref="T:System.Object" />.A copy of the current instance.</returns>
-        //object ICloneable.Clone()
-        //{
-        //    return new MediaTypeHeaderValue(this);
-        //}
+        public MediaTypeHeaderValue Clone()
+        {            
+            var result = new MediaTypeHeaderValue(this.mediaType);
+            foreach (var parameter in this.Parameters)
+            {
+                result.Parameters.Add(new NameValueHeaderValue(parameter.Name, parameter.Value));
+            }
+
+            return result;
+        }
 
         /// <summary>Returns a string that represents the current <see cref="T:NMasters.Silverlight.Net.Http.Headers.MediaTypeHeaderValue" /> object.</summary>
         /// <returns>Returns <see cref="T:System.String" />.A string that represents the current object.</returns>
@@ -234,14 +241,7 @@ namespace NMasters.Silverlight.Net.Http.Headers
         /// <returns>Returns <see cref="T:System.Collections.Generic.ICollection`1" />.The media-type header value parameters.</returns>
         public ICollection<NameValueHeaderValue> Parameters
         {
-            get
-            {
-                if (this.parameters == null)
-                {
-                    this.parameters = new ObjectCollection<NameValueHeaderValue>();
-                }
-                return this.parameters;
-            }
+            get { return this.parameters ?? (this.parameters = new ObjectCollection<NameValueHeaderValue>()); }
         }
     }
 }

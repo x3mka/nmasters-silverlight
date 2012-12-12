@@ -74,6 +74,64 @@ namespace NMasters.Silverlight.Net.Http.Linq.Collections
             }
         }
 
+        public TValue GetOrAdd(TKey key, TValue value)
+        {
+            lock (_lock)
+            {
+                if (!_dictionary.ContainsKey(key))
+                    _dictionary.Add(key, value);
+                return _dictionary[key];
+            }
+        }
+
+        public TValue GetOrAdd(TKey key, Func<TKey, TValue> valueFactory)
+        {
+            lock (_lock)
+            {
+                return GetOrAdd(key, valueFactory(key));                    
+            }
+        }
+
+        public TValue AddOrUpdate(TKey key, TValue addValue, Func<TKey, TValue, TValue> updateValueFactory)
+        {
+            lock (_lock)
+            {                
+                while (true)
+                {
+                    TValue oldValue;
+                    if (TryGetValue(key, out oldValue))
+                    //key exists, try to update 
+                    {
+                        var newValue = updateValueFactory(key, oldValue);
+                        _dictionary[key] = newValue;
+                        
+                        return newValue;                        
+                    }
+                    
+                    if (TryAddValue(key, addValue))
+                    {
+                        return addValue;
+                    }                    
+                }
+            }
+        } 
+
+
+        public bool TryRemove(TKey key, out TValue value)
+        {
+            lock (_lock)
+            {
+                value = default(TValue);                
+
+                if (!_dictionary.ContainsKey(key))
+                    return false;
+
+                value = _dictionary[key];
+                _dictionary.Remove(key);
+                return true;                
+            }
+        }
+
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
             lock (_lock)
